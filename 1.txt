@@ -1,6 +1,6 @@
 // Test procedur obs³ugi drzewa BST ++++bla+++bla+++bla
 // (C)2008 mgr Jerzy Wa³aszek //bardzo ladnie, panie Jerzy
-// Ko³o informatyczne I LO w Tarnowie
+// Ko³o informatyczne I LO w Tarnowie //hehehe
 //-----------------------------------
 
 #include <iostream>
