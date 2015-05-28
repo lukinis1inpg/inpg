@@ -1,4 +1,4 @@
-// Test procedur obs³ugi drzewa BST
+// Test procedur obs³ugi drzewa BST ++++bla+++bla+++bla
 // (C)2008 mgr Jerzy Wa³aszek //bardzo ladnie, panie Jerzy
 // Ko³o informatyczne I LO w Tarnowie
 //-----------------------------------
