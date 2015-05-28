@@ -1,0 +1,58 @@
+// Test procedur obs³ugi drzewa BST
+// (C)2008 mgr Jerzy Wa³aszek
+// Ko³o informatyczne I LO w Tarnowie
+//-----------------------------------
+
+#include <iostream>
+
+using namespace std;
+
+// definicja typu danych reprezentuj¹cego wêze³ drzewa BST
+//--------------------------------------------------------
+
+struct BSTNode
+{
+  BSTNode * p, * left, * right;
+  int key;
+    // tutaj mo¿na umieszczaæ inne pola danych
+};
+
+// Definicja klasy obs³uguj¹cej drzewo BST
+//----------------------------------------
+
+class BST
+{
+  public:
+    BSTNode * root;  // korzeñ drzewa
+    int count;       // liczba wêz³ów
+  
+    BST();
+    ~BST();
+    bool      insert(BSTNode * n);
+    BSTNode * search(int key);
+    int       maxKey(BSTNode * x);
+    int       minKey(BSTNode * x);
+    BSTNode * maxNode(BSTNode * x);
+    BSTNode * minNode(BSTNode * x);
+    BSTNode * pred(BSTNode * x);
+    BSTNode * succ(BSTNode * x);
+    BSTNode * remove(BSTNode * x);
+    void      preorder(BSTNode * x);
+    void      inorder(BSTNode * x);
+    void      postorder(BSTNode * x);
+    void      walk(BSTNode * x);
+    void      coutBSTcount();
+};
+
+// **********************************************
+// *** Definicje funkcji sk³adowych klasy BST ***
+// **********************************************
+
+// Konstruktor klasy BST
+//----------------------
+
+BST::BST()
+{
+  root = NULL;
+  count = 0;
+}

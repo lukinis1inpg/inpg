@@ -1,0 +1,59 @@
+// Destruktor klasy BST
+//---------------------
+
+BST::~BST()
+{
+  while(root) delete(remove(root));
+}
+
+// Wstawia element do struktury BST
+//---------------------------------
+
+bool BST::insert(BSTNode * n)
+{
+  BSTNode * y, * x = root;
+
+  y = n->left = n->right = NULL;
+
+  while(x)
+  {
+    if(n->key == x->key)
+    {
+      delete n;
+      return false;
+    }
+    y = x;
+    x = (n->key < x->key) ? x->left : x->right;
+  }
+
+  n->p = y;
+
+  if(!y) root = n;
+  else if(n->key < y->key) y->left  = n;
+  else                     y->right = n;
+
+  count++;
+  return true; 
+}
+
+// Wyszukuje element wg wartoœci klucza
+//-------------------------------------
+
+BSTNode * BST::search(int key)
+{
+  BSTNode * x = root;
+
+  while((x) && (x->key != key))
+    x = (key < x->key) ? x->left : x->right;
+
+  return x;  
+}
+
+// Zwraca masymaln¹ wartoœæ klucza
+//--------------------------------
+
+int BST::minKey(BSTNode * x)
+{
+  while(x->left) x = x->left;
+  return x->key;  
+}

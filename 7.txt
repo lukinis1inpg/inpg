@@ -1,0 +1,59 @@
+// Znajduje poprzednik wêz³a o zadanym kluczu
+//-------------------------------------------
+
+void pred(BST * T)
+{
+  cout << "Znajdowanie poprzednika w drzewie BST\n"
+          "-------------------------------------\n\n"
+          "Podaj klucz wezla : ";
+  int key;
+  BSTNode * x;
+  
+  cin >> key;
+  cout << endl;
+  
+  x = T->search(key);
+  
+  if(x)
+  {
+    x = T->pred(x);
+    if(x) cout << "Poprzednikiem [" << key << "] jest " << x->key << endl;
+    else  cout << "Wezel [" << key << "] nie posiada poprzednika\n";   
+  }
+  else cout << "Wezel o podanym kluczu nie istnieje w drzewie BST\n";
+}
+
+// Znajduje nastêpnik wêz³a o zadanym kluczu
+//------------------------------------------
+
+void succ(BST * T)
+{
+  cout << "Znajdowanie nastepnika w drzewie BST\n"
+          "------------------------------------\n\n"
+          "Podaj klucz wezla : ";
+  int key;
+  BSTNode * x;
+  
+  cin >> key;
+  cout << endl;
+  
+  x = T->search(key);
+  
+  if(x)
+  {
+    x = T->succ(x);
+    if(x) cout << "Nastepnikiem [" << key << "] jest " << x->key << endl;
+    else  cout << "Wezel [" << key << "] nie posiada nastepnika\n";   
+  }
+  else cout << "Wezel o podanym kluczu nie istnieje w drzewie BST\n";     
+}
+
+// Przechodzi przez drzewo algorytmem preorder
+//--------------------------------------------
+
+void preorder(BST * T)
+{
+  cout << "Przechodzenie drzewa BST algorytmem preorder\n"
+          "--------------------------------------------\n\n";
+  T->preorder(T->root);    
+}

@@ -1,0 +1,95 @@
+// Usuwanie wêz³ów w drzewie BST
+// Data: 1.05.2013
+// (C)2013 mgr Jerzy Wa³aszek
+//------------------------------
+
+program bst;
+
+// Typ wêz³ów drzewa BST
+
+type
+  PBSTNode = ^BSTNode;
+  BSTNode  = record
+    up,left,right : PBSTNode;
+    key   : integer;
+  end;
+
+// Zmienne globalne
+
+var
+  cr,cl,cp : string;      // ³añcuchy do znaków ramek
+
+// Procedura wypisuje drzewo
+//--------------------------
+procedure printBT(sp,sn : string; v : PBSTNode);
+var
+  s : string;
+begin
+  if v <> nil then
+  begin
+    s := sp;
+    if sn = cr then s[length(s) - 1] := ' ';
+    printBT(s+cp,cr,v^.right);
+
+    s := Copy(sp,1,length(sp)-2);
+    writeln(s,sn,v^.key);
+
+    s := sp;
+    if sn = cl then s[length(s) - 1] := ' ';
+    printBT(s+cp,cl,v^.left);
+  end;
+end;
+
+// Procedura DFS:postorder usuwaj¹ca drzewo
+//-----------------------------------------
+procedure DFSRelease(v : PBSTNode);
+begin
+  if v <> nil then
+  begin
+    DFSRelease(v^.left);   // usuwamy lewe poddrzewo
+    DFSRelease(v^.right);  // usuwamy prawe poddrzewo
+    dispose(v);            // usuwamy sam wêze³
+  end;
+end;
+
+// Procedura wstawia do drzewa BST wêze³ o kluczu k
+//-------------------------------------------------
+procedure insertBST(var root : PBSTNode; k : integer);
+var
+  w,p : PBSTNode;
+begin
+
+  new(w);            // Tworzymy dynamicznie nowy wêze³
+
+  w^.left  := nil;   // Zerujemy wskazania synów
+  w^.right := nil;
+  w^.key := k;       // Wstawiamy klucz
+
+  p := root;         // Wyszukujemy miejsce dla w, rozpoczynaj¹c od korzenia
+
+  if p = nil then    // Drzewo puste?
+    root := w        // Jeœli tak, to w staje siê korzeniem
+  else
+    while true do    // Pêtla nieskoñczona
+      if k < p^.key then // W zale¿noœci od klucza idziemy do lewego lub
+      begin              // prawego syna, o ile takowy istnieje
+        if p^.left = nil then // Jeœli lewego syna nie ma,
+        begin
+          p^.left := w;  // to w staje siê lewym synem
+          break;         // Przerywamy pêtlê while
+        end
+        else p := p^.left;
+      end
+      else
+      begin
+        if p^.right = nil then // Jeœli prawego syna nie ma,
+        begin
+          p^.right := w; // to w staje siê prawym synem
+          break;         // Przerywamy pêtlê while
+        end
+        else p := p^.right;
+      end;
+
+  w^.up  := p;           // Ojcem w jest zawsze p
+
+end;

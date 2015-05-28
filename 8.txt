@@ -1,0 +1,71 @@
+// Przechodzi przez drzewo algorytmem inorder
+//--------------------------------------------
+
+void inorder(BST * T)
+{
+  cout << "Przechodzenie drzewa BST algorytmem inorder\n"
+          "-------------------------------------------\n\n";
+  T->inorder(T->root);
+}
+
+// Przechodzi przez drzewo algorytmem postorder
+//--------------------------------------------
+
+void postorder(BST * T)
+{
+  cout << "Przechodzenie drzewa BST algorytmem postorder\n"
+          "---------------------------------------------\n\n";
+  T->postorder(T->root);     
+}
+
+// **********************
+// *** Program g³ówny ***
+// **********************
+
+main()
+{
+  BST * T = new BST();
+  int choice;
+  
+  do
+  {
+    system("cls"); // w Linuxie wstaw clear
+    cout << "Test funkcji obslugi drzew poszukiwan binarnych\n"
+            "===============================================\n\n"
+            "Wybor Funkcja\n"
+            "-------------\n"
+            " [0]  Koniec\n"
+            " [1]  Dodaj wezly\n"
+            " [2]  Usun wezel\n"
+            " [3]  Sprawdz obecnosc wezla\n"
+            " [4]  Wezel min i max\n"
+            " [5]  Poprzednik\n"
+            " [6]  Nastepnik\n"
+            " [7]  Preorder\n"
+            " [8]  Inorder\n"
+            " [9]  Postorder\n"
+            "--------------\n"
+            "Twoj wybor : ";
+    cin >> choice;
+    system("cls");
+    switch(choice)
+    {
+      case 1 : add(T);       break;
+      case 2 : del(T);       break;
+      case 3 : check(T);     break;
+      case 4 : minmax(T);    break;
+      case 5 : pred(T);      break;
+      case 6 : succ(T);      break;
+      case 7 : preorder(T);  break;
+      case 8 : inorder(T);   break;
+      case 9 : postorder(T); break;
+    }
+    if((choice >= 1) && (choice <= 9))
+    {
+      cout << endl;
+      system("pause");
+    }
+  } while(choice);
+  
+  delete T;
+}
