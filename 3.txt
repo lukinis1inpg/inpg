@@ -1,4 +1,4 @@
-// Zwraca minimaln¹ wartoœæ klucza
+//// Zwraca minimaln¹ wartoœæ klucza
 //--------------------------------
 
 int BST::maxKey(BSTNode * x)
