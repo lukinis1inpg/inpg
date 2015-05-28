@@ -2,7 +2,7 @@
 // (C)2008 mgr Jerzy Wa³aszek //bardzo ladnie, panie Jerzy
 // Ko³o informatyczne I LO w Tarnowie //trololo
 //-----------------------------------
-
+//
 #include <iostream>
 
 using namespace std;
