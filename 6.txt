@@ -1,0 +1,55 @@
+// Usuwa wêze³ o zadanym kluczu
+//-----------------------------
+
+void del(BST * T)
+{
+  cout << "Usuwanie wezla drzewa BST o zadanym kluczu\n"
+          "------------------------------------------\n\n";
+  T->coutBSTcount();
+  
+  BSTNode * x;
+  int key;
+  
+  cout << "Podaj klucz usuwanego wezla : "; cin >> key;
+
+  x = T->search(key);
+  
+  if(x)
+  {
+    delete T->remove(x);
+    cout << endl;
+    if(T->root) T->walk(T->root);
+    T->coutBSTcount();    
+  }
+  else cout << "\nBrak wezla o takim kluczu\n";
+}
+
+// Sprawdza, czy drzewo zawiera wêze³ o zadanym kluczu
+//----------------------------------------------------
+
+void check(BST * T)
+{
+  cout << "Sprawdzenie obecnosci wezla o danym kluczu w drzewie BST\n"
+          "--------------------------------------------------------\n\n"
+          "Podaj klucz wezla : ";
+
+  int key;
+  
+  cin >> key;
+  
+  cout << endl;
+  
+  if(T->search(key)) cout << "Wezel znaleziony.\n";
+  else               cout << "W drzewie BST brak wezla o podanym kluczu\n";
+}
+
+// Znajduje minimalny i maksymalny klucz
+//--------------------------------------
+
+void minmax(BST * T)
+{
+  cout << "Znajdowanie minimalnego i maksymalnego klucza w drzewie BST\n"
+          "-----------------------------------------------------------\n\n"
+          "Klucz minimalny  : " << T->minKey(T->root) << endl <<
+          "Klucz maksymalny : " << T->maxKey(T->root) << endl;
+}

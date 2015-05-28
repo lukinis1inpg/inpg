@@ -1,0 +1,56 @@
+// Zwraca wêze³ nastêpnika
+//------------------------
+
+BSTNode * BST::succ(BSTNode * x)
+{
+  if(x->right) return minNode(x->right);
+
+  BSTNode * y;
+
+  do
+  {
+    y = x;
+    x = x->p;
+  } while(x && (x->left != y));
+
+  return x;
+}
+
+// Usuwa element x ze struktury BST. Zwraca usuniêty wêze³
+//--------------------------------------------------------
+
+BSTNode * BST::remove(BSTNode * x)
+{
+  BSTNode * y = x->p, * z;
+
+  if((x->left) && (x->right))
+  {
+    z = (rand() % 2) ? remove(pred(x)) : remove(succ(x));
+    z->left = x->left;   if(z->left)  z->left->p  = z;
+    z->right = x->right; if(z->right) z->right->p = z;
+    count++;
+  }
+  else z = (x->left) ? x->left : x->right;
+
+  if(z) z->p = y;
+  
+  if(!y) root = z;
+  else if(y->left == x) y->left = z; else y->right = z;
+  
+  count--;
+  return x;
+}
+
+
+// Przechodzi przez BST metod¹ preorder
+//-------------------------------------
+
+void BST::preorder(BSTNode * x)
+{
+  if(x)
+  {
+    cout << x->key << endl;  // tutaj przetwarzamy bie¿¹cy wêze³
+    preorder(x->left);
+    preorder(x->right);
+  }  
+}

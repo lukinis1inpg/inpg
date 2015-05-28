@@ -1,0 +1,92 @@
+// Funkcja szuka w drzewie BST wêz³a o zadanym kluczu.
+// Jeœli go znajdzie, zwraca jego wskazanie. Je¿eli nie,
+// to zwraca wskazanie puste.
+// Parametrami s¹:
+// p - wskazanie korzenia drzewa BST
+// k - klucz poszukiwanego wêz³a
+//----------------------------------------------------
+function findBST(p : PBSTNode; k : integer) : PBSTNode;
+begin
+
+  while (p <> nil) and (p^.key <> k) do
+    if k < p^.key then p := p^.left
+    else               p := p^.right;
+
+  findBST := p;
+end;
+
+// Funkcja zwraca wskazanie wêz³a o najmniejszym kluczu.
+// Parametrem jest wskazanie korzenia drzewa BST.
+//------------------------------------------------------
+function minBST(p : PBSTNode) : PBSTNode;
+begin
+  if p <> nil then
+    while p^.left <> nil do
+      p := p^.left;
+
+  minBST := p;
+end;
+
+// Funkcja znajduje nastêpnik wêz³a p
+//-----------------------------------
+function succBST(p : PBSTNode) : PBSTNode;
+var
+  r : PBSTNode;
+begin
+  succBST := nil;
+  if p <> nil then
+  begin
+    if p^.right <> nil then succBST := minBST(p^.right)
+    else
+    begin
+      r := p^.up;
+      while (r <> nil) and (p = r^.right) do
+      begin
+        p := r;
+        r := r^.up;
+      end;
+      succBST := r;
+    end;
+  end;
+end;
+
+// Procedura usuwa wêze³ z drzewa BST
+// root - referencja do zmiennej wskazuj¹cej wêze³
+// X    - wskazanie wêz³a do usuniêcia
+//----------------------------------------------
+procedure removeBST(var root : PBSTNode; X : PBSTNode);
+var
+  Y,Z : PBSTNode;
+begin
+  if X <> nil then
+  begin
+
+    // Jeœli X nie ma synów lub ma tylko jednego, to Y wskazuje X
+    // Inaczej Y wskazuje nastêpnik X
+
+    if (X^.left = nil) or (X^.right = nil) then Y := X
+    else                                        Y := succBST(X);
+
+    // Z wskazuje syna Y lub nil
+
+    if Y^.left <> nil then Z := Y^.left
+    else                   Z := Y^.right;
+
+    // Jeœli syn Y istnieje, to zast¹pi Y w drzewie
+
+    if Z <> nil then Z^.up := Y^.up;
+
+    // Y zostaje zast¹pione przez Z w drzewie
+
+    if Y^.up = nil then root := Z
+    else if Y = Y^.up^.left then Y^.up^.left  := Z
+    else                         Y^.up^.right := Z;
+
+    // Jeœli Y jest nastêpnikiem X, to kopiujemy dane
+
+    if Y <> X then X^.key := Y^.key;
+
+    Dispose(Y);
+
+  end;
+end;

@@ -1,0 +1,83 @@
+// Przechodzi przez BST metod¹ inorder
+//------------------------------------
+
+void BST::inorder(BSTNode * x)
+{
+  if(x)
+  {
+    inorder(x->left);
+    cout << x->key << endl;  // tutaj przetwarzamy bie¿¹cy wêze³
+    inorder(x->right);
+  }
+}
+
+// Przechodzi przez BST metod¹ postorder
+//--------------------------------------
+
+void BST::postorder(BSTNode * x)
+{
+  if(x)
+  {
+    postorder(x->left);
+    postorder(x->right);
+    cout << x->key << endl;  // tutaj przetwarzamy bie¿¹cy wêze³
+  }  
+}
+
+// Przechodzi przez drzewo wypisuj¹c zawartoœæ wêz³ów
+//---------------------------------------------------
+
+void BST::walk(BSTNode * x)
+{
+  cout << x->key << " : Left-> ";
+  if(x->left) cout << x->left->key;
+  else        cout << "NIL";
+  cout << ", Right-> ";
+  if(x->right) cout << x->right->key;
+  else         cout << "NIL";
+  cout << endl;
+  if(x->left)  walk(x->left);
+  if(x->right) walk(x->right);
+}
+
+
+// Wypisuje do cout liczbê wêz³ów drzewa BST
+//------------------------------------------
+
+void BST::coutBSTcount()
+{
+  cout << "\nLiczba wezlow drzewa BST : " << count << endl << endl;  
+}
+
+// **********************************
+// *** Funkcje obs³ugi opcji menu ***
+// **********************************
+
+
+// Dodaje nowe wêz³y do drzewa BST
+//--------------------------------
+
+void add(BST * T)
+{
+  cout << "Dodawanie nowych wezlow do drzewa BST\n"
+          "-------------------------------------\n\n";
+  T->coutBSTcount();
+  cout << "Podaj liczbe wezlow do utworzenia, a nastepnie wprowadz odpowiednia\n"
+          "liczbe kluczy nowych wezlow.\n\n";
+
+  int i,n;
+
+  BSTNode * x;
+  
+  cin >> n;
+  for(i = 0; i < n; i++)
+  {
+    x = new BSTNode;
+    cin >> x->key;
+    T->insert(x);      
+  }
+  
+  cout << endl;
+  T->walk(T->root);
+  T->coutBSTcount();      
+}

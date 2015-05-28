@@ -1,0 +1,44 @@
+// Zwraca minimaln¹ wartoœæ klucza
+//--------------------------------
+
+int BST::maxKey(BSTNode * x)
+{
+  while(x->right) x = x->right;
+  return x->key;  
+}
+
+// Zwraca wêze³ z maksymalnym kluczem
+//-----------------------------------
+
+BSTNode * BST::minNode(BSTNode * x)
+{
+  while(x->left) x = x->left;
+  return x;
+}
+
+// Zwraca wêze³ z minimalnym kluczem
+//----------------------------------
+
+BSTNode * BST::maxNode(BSTNode * x)
+{
+  while(x->right) x = x->right;
+  return x;
+}
+
+// Zwraca wêze³ poprzednika
+//-------------------------
+
+BSTNode * BST::pred(BSTNode * x)
+{
+  if(x->left) return maxNode(x->left);
+
+  BSTNode * y;
+
+  do
+  {
+    y = x;
+    x = x->p;
+  } while(x && (x->right != y));
+
+  return x;  
+}
